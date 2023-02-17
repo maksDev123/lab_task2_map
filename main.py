@@ -64,8 +64,6 @@ def find_by_year(path, skip, year_find, latitude_fixed, longitude_fixed):
                         address = left_part[-1].strip().replace("\\t", "").replace("\\n", "")
                         if left_part[-1] == "":
                             address = left_part[-2].strip().replace("\\t", "").replace("\\n", "")
-                        print(address)
-                        print(index)
                         if ".," in address:
                             address = address.split(".,")[-1]
 
@@ -128,7 +126,7 @@ def build_map(year, latitude, longitude, path_to_dataset):
     dictionary_display = find_near_unique(data_list, 10)
 
     map = folium.Map(location=[latitude, longitude],
-    zoom_start = 1)
+    zoom_start = 2)
     marker_groups = folium.FeatureGroup(name="Movie")
     html = """<h4>Movie/es information:</h4>
     Film name/s: {},<br>
@@ -156,10 +154,10 @@ def build_map(year, latitude, longitude, path_to_dataset):
                     style_function = lambda x:{'color':
         'green' if haversin(float(x["geometry"]["coordinates"][0][1]),
             float(x["geometry"]["coordinates"][0][0]), float(x["geometry"]["coordinates"][1][1]),
-            float(x["geometry"]["coordinates"][1][0])) < 500
-            else 'orange' if 500 <=  haversin(float(x["geometry"]["coordinates"][0][1]),
+            float(x["geometry"]["coordinates"][1][0])) < 300
+            else 'orange' if 300 <=  haversin(float(x["geometry"]["coordinates"][0][1]),
             float(x["geometry"]["coordinates"][0][0]), float(x["geometry"]["coordinates"][1][1]),
-            float(x["geometry"]["coordinates"][1][0])) < 1000 
+            float(x["geometry"]["coordinates"][1][0])) < 700
             else 'red'}
     ))
     map.add_child(fg_pp)

@@ -55,7 +55,7 @@ def find_by_year(path, skip, year_find, latitude_fixed, longitude_fixed):
     try:
         with open(path, "r") as file:
             lines = set(file.readlines()[skip:])
-            for index, line in enumerate(lines):
+            for _, line in enumerate(lines):
                 try:
                     left_part = str(line).strip().replace("\\t", "").replace("\\n", "").split(")")
                     year = left_part[0][-4:]
@@ -126,7 +126,7 @@ def build_map(year, latitude, longitude, path_to_dataset):
     dictionary_display = find_near_unique(data_list, 10)
 
     map = folium.Map(location=[latitude, longitude],
-    zoom_start = 2)
+    zoom_start = 6)
     marker_groups = folium.FeatureGroup(name="Movie")
     html = """<h4>Movie/es information:</h4>
     Film name/s: {},<br>

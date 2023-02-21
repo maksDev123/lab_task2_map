@@ -28,6 +28,12 @@ def haversin(latitude, longitude, latitude_1, longitude_1):
     >>> haversin(3.33, 1.1246, 5.555, 1.357)
     248.746
     """
+    try:
+        float(latitude_1), float(latitude), float(longitude), float(longitude_1)
+    except ValueError:
+        print("Unappropriate data format")
+        exit()
+
     earth_radius = 6371 # Earth radius in kilometers
     delta_latitude = radians(latitude - latitude_1)
     delta_longitude = radians(longitude - longitude_1)
@@ -74,8 +80,8 @@ def find_by_year(path, skip, year_find, latitude_fixed, longitude_fixed):
                             location.longitude, location.address))
                 except (ValueError, AttributeError):
                     continue
-    except:
-        print("Unable to read file")
+    except FileNotFoundError:
+        print("Unable to find file")
         exit()
     return data
 
@@ -99,6 +105,11 @@ def find_near_unique(data_list, number_movies):
     {(1.101, 1.101): [('Start', 100, 1.101, 1.101, 'USA'), ('Glory', 100, 1.101, 1.101, 'USA')],\
  (1.975, 3.7): [('Student', 1700, 1.975, 3.7, 'USA')]}
     '''
+    try:
+        list(data_list), int(number_movies)
+    except ValueError:
+        print("Unappropriate data format")
+        exit()
     display_dictionary = {}
     index = 0
     while len(display_dictionary) != number_movies:
